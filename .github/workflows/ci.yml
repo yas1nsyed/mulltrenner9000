@@ -21,5 +21,6 @@ jobs:
                   github_repo_id: yas1nsyed/mulltrenner9000
                   huggingface_repo_id: Yas1n/mulltrenner9000
                   repo_type: space
+                  private: false
                   space_sdk: gradio
                   hf_token: ${{ secrets.HF_TOKEN }}
