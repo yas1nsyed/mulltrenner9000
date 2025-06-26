@@ -1,4 +1,6 @@
 import gradio as gr
+from ..process.process import display_result
+import os
 
 
 def main_interface():
@@ -10,5 +12,5 @@ def main_interface():
         with gr.Row():
             input_image = gr.Image(type="numpy", label="Upload Image")
             output_image = gr.Image(type="numpy", label="Segmented Output")
-        # input_image.change(fn=predict, inputs=input_image, outputs=output_image)
+        input_image.change(fn=display_result, inputs=input_image, outputs=output_image)
     return demo
