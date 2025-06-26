@@ -32,12 +32,12 @@ bin_map = {
     "Hazardous Waste (Sondermüll)": [
         "Battery", "Aerosol", "Scrap metal"
     ],
-    "Deposit Return (Pfand)": [s
+    "Deposit Return (Pfand)": [
         "Drink can", "Clear plastic bottle", "Glass bottle", "Food Can"
     ]
 }
 
-# Bin colors in BGR format (for OpenCV)
+# Bin colors in RGB format (for OpenCV)
 bin_colors = {
     "Yellow Bin (Gelbe Tonne)": (255, 255, 0),       # Yellow
     "Grey Bin (Restmüll)": (128, 128, 128),          # Gray
