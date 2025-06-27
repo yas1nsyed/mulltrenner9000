@@ -1,7 +1,7 @@
 name: Sync with Hugging Face Repo
 
 on:
-    pull_request:
+    push:
         branches:
             [main]
     workflow_dispatch:

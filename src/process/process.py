@@ -2,6 +2,10 @@ from ultralytics import YOLO
 import cv2
 import numpy as np
 import os
+from huggingface_hub import hf_hub_download
+
+REPO_ID = "Yas1n/mulltrenner_yolov11"
+FILENAME = "best_heavy_59classes.pt"
 
 # Waste Bin Mapping (German Mülltrennung System)
 bin_map = {
@@ -53,8 +57,9 @@ class_to_bin = {cls: bin_type for bin_type, cls_list in bin_map.items() for cls 
 def display_result(image_to_segment):
 
     # Load model
-    model_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, 'models', 'best_heavy_59classes.pt'))
-    model = YOLO(model_path)
+    model = YOLO(
+    hf_hub_download(repo_id=REPO_ID, filename=FILENAME)
+    )
 
     # Resize image
     image = cv2.resize(image_to_segment, (640,640))
