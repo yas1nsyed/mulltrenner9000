@@ -65,7 +65,7 @@ def display_result(image_to_segment):
     image = cv2.resize(image_to_segment, (640,640))
 
     # Run prediction
-    results = model(image_to_segment)
+    results = model(image)
     result = results[0]
 
     # Get class names
