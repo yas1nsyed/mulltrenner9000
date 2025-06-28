@@ -5,7 +5,7 @@ import os
 from huggingface_hub import hf_hub_download
 
 REPO_ID = "Yas1n/mulltrenner_yolov11"
-FILENAME = "best_heavy_59classes.pt"
+FILENAME = "best_0.1.0.pt"
 
 # Waste Bin Mapping (German Mülltrennung System)
 bin_map = {
@@ -18,7 +18,7 @@ bin_map = {
         "Pop tab", "Single-use carrier bag", "Six pack rings", "Spread tub", "Squeezable tube",
         "Tupperware"
     ],
-    "Grey Bin (Restmüll)": [
+    "Grey Bin (Restmull)": [
         "Cigarette", "Garbage bag", "Shoe", "Unlabeled litter", "Plastified paper bag",
         "Styrofoam piece", "Rope & strings", "Foam food container", "Other plastic",
         "Pizza box", "Tissues"
@@ -33,7 +33,7 @@ bin_map = {
     "Glascontainer": [
         "Glass bottle", "Glass cup", "Glass jar", "Broken glass"
     ],
-    "Hazardous Waste (Sondermüll)": [
+    "Hazardous Waste (Sondermull)": [
         "Battery", "Aerosol", "Scrap metal"
     ],
     "Deposit Return (Pfand)": [
@@ -44,11 +44,11 @@ bin_map = {
 # Bin colors in RGB format (for OpenCV)
 bin_colors = {
     "Yellow Bin (Gelbe Tonne)": (255, 255, 0),       # Yellow
-    "Grey Bin (Restmüll)": (128, 128, 128),          # Gray
+    "Grey Bin (Restmull)": (128, 128, 128),          # Gray
     "Green Bin (Biotonne)": (0, 255, 0),             # Green
     "Blue Bin (Papiertonne)": (0, 0, 250),           # Blue (bright)
     "Glascontainer": (0, 0, 0),                      # Black
-    "Hazardous Waste (Sondermüll)": (255, 0, 0),     # Red
+    "Hazardous Waste (Sondermull)": (255, 0, 0),     # Red
     "Deposit Return (Pfand)": (255, 0, 255)          # Purple/Magenta
 }
 
@@ -65,7 +65,7 @@ def display_result(image_to_segment):
     image = cv2.resize(image_to_segment, (640,640))
 
     # Run prediction
-    results = model(image)
+    results = model(image) # Check, it is taking much longer than to just pass (image_to_segment); try scaling bounding box
     result = results[0]
 
     # Get class names
@@ -95,7 +95,7 @@ def display_result(image_to_segment):
 
         class_name = class_names[class_id]
 
-        bin_type = next((bin_name for bin_name, items in bin_map.items() if class_name in items), "abcd")
+        bin_type = next((bin_name for bin_name, items in bin_map.items() if class_name in items), "Cannot detect, please check")
         color = bin_colors.get(bin_type, (255, 255, 255))  # fallback to white
 
         # Apply colored mask (blended)
@@ -112,6 +112,6 @@ def display_result(image_to_segment):
         label = f"{class_name} ({int(score * 100)}%)\n{bin_type}"
         for j, line in enumerate(label.split("\n")):
             text_pos = (box[0], box[1] - 10 - 20 * j)
-            cv2.putText(overlay, line, text_pos, cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2, cv2.LINE_AA)
+            cv2.putText(overlay, line, text_pos, cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 1.5, cv2.LINE_AA)
     
     return (overlay)
