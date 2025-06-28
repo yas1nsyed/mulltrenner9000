@@ -1,19 +1,22 @@
-name: Sync with Hugging Face Hub
+name: Sync to Hugging Face hub
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
-  build:
+  sync-to-hub:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Sync with Hugging Face
-      uses: nateraw/huggingface-sync-action@v0.0.4
-      with:
-        github_repo_id: yas1nsyed/mulltrenner9000
-        huggingface_repo_id: Yas1n/mulltrenner9000
-        repo_type: space
-        space_sdk: gradio
-        hf_token: ${{ secrets.HF_TOKEN }}
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Push to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git push https://Yas1n:$HF_TOKEN@huggingface.co/spaces/Yas1n/mulltrenner9000 main
