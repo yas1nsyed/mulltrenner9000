@@ -77,7 +77,7 @@ def display_result(image_to_segment):
     # Handle case with no trash
     if result.masks is None or result.boxes is None or len(result.boxes) == 0:
         overlay = image.copy()
-        cv2.putText(overlay, "No trash detected!", (30, 60), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 0, 0), 3, cv2.LINE_AA)
+        cv2.putText(overlay, "No trash detected!", (30, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3, cv2.LINE_AA)
         return (overlay) 
 
     masks = result.masks.data.cpu().numpy()
@@ -112,6 +112,6 @@ def display_result(image_to_segment):
         label = f"{class_name} ({int(score * 100)}%)\n{bin_type}"
         for j, line in enumerate(label.split("\n")):
             text_pos = (box[0], box[1] - 10 - 20 * j)
-            cv2.putText(overlay, line, text_pos, cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 1.5, cv2.LINE_AA)
+            cv2.putText(overlay, line, text_pos, cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2, cv2.LINE_AA)
     
     return (overlay)
