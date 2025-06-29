@@ -11,7 +11,7 @@ FILENAME = "best_0.1.0.pt"
 bin_map = {
     "Yellow Bin (Gelbe Tonne)": [
         "Aluminium blister pack", "Aluminium foil", "Carded blister pack", "Clear plastic bottle",
-        "Disposable food container", "Disposable plastic cup", "Drink Carton", "Drink can",
+        "Disposable food container", "Disposable plastic cup", "Drink carton",
         "Foam cup", "Meal carton", "Metal lid", "Metal bottle cap", "Other plastic bottle",
         "Other plastic container", "Other plastic cup", "Other plastic wrapper", "Plastic bottle cap",
         "Plastic film", "Plastic glooves", "Plastic lid", "Plastic straw", "Polypropylene bag",
